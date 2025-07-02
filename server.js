@@ -14,10 +14,10 @@ app.use(bodyParser.json());
 
 // Підключення до MySQL
 const db = mysql.createConnection({
-  host: '13.53.200.62',   // або IP адреса твого сервера MySQL
-  user: 'root_nik',        // ім'я користувача для доступу до бази даних
-  password: '123qweasd',        // пароль для доступу до бази даних
-  database: 'mama_site',  // ім'я твоєї бази даних
+  host: 'localhost',   // або IP адреса твого сервера MySQL
+  user: 'root',        // ім'я користувача для доступу до бази даних
+  password: '1234',        // пароль для доступу до бази даних
+  database: 'flowerslife',  // ім'я твоєї бази даних
 });
 
 db.connect((err) => {

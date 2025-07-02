@@ -6,7 +6,7 @@ const Header = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   
   const saveContact = async (contactName, contactPhone, contactMessage) => {
-    try {
+   /*) try {
       const response = await fetch('http://localhost:3001/contact', {
         method: 'POST',
         headers: {
@@ -25,11 +25,25 @@ const Header = () => {
         setIsModalOpen(false);
       } else {
         alert('Помилка збереження даних.');
-      }
+      } 
     } catch (error) {
       console.error('Помилка:', error);
       alert('Сталася помилка.');
-    }
+    } */
+  fetch('https://site-for-mama.vercel.app/', {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json',
+  },
+  body: JSON.stringify({
+     name: contactName,
+     phone: contactPhone,
+     message: contactMessage
+  }),
+})
+  .then(res => res.json())
+  .then(data => console.log(data))
+  .catch(err => console.error(err));
   };
 
   return (
