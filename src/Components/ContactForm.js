@@ -8,7 +8,24 @@ const ContactForm = ({ isOpen, onClose, onSave }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await onSave(name, phone, message);
+    //await onSave(name, phone, message);
+   try {
+      const res = await fetch('http://13.53.200.62:3001/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(formData)
+      });
+
+      const data = await res.json();
+      setResponse(data.message || 'OK');
+      setFormData({ name: '', phone: '', message: '' });
+
+    } catch (err) {
+      console.error(err);
+      setResponse('Помилка при надсиланні');
+    }
   };
 
   if (!isOpen) return null;
