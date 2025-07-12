@@ -1,30 +1,40 @@
 import React, { useState } from 'react';
 import './ContactForm.css';
 
-const ContactForm = ({ isOpen, onClose, onSave }) => {
+const ContactForm = ({ isOpen, onClose }) => {
   const [name, setName] = useState('');
   const [phone, setPhone] = useState('');
   const [message, setMessage] = useState('');
+  const [response, setResponse] = useState('');
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    //await onSave(name, phone, message);
-   try {
+
+    const data = {
+      name: name,
+      phone: phone,
+      message: message
+    };
+
+    try {
       const res = await fetch('http://13.53.200.62:3001/contact', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify(formData)
+        body: JSON.stringify(data)
       });
 
-      const data = await res.json();
-      setResponse(data.message || 'OK');
-      setFormData({ name: '', phone: '', message: '' });
+      const result = await res.json();
+      setResponse(result.message || 'OK');
 
+      // Очистити поля форми
+      setName('');
+      setPhone('');
+      setMessage('');
     } catch (err) {
       console.error(err);
-      setResponse('Помилка при надсиланні');
+      setResponse('❌ Помилка при надсиланні');
     }
   };
 
@@ -54,7 +64,7 @@ const ContactForm = ({ isOpen, onClose, onSave }) => {
             />
           </div>
           <div>
-            <label>Коментар</label>
+            <label>Коментар:</label>
             <textarea
               value={message}
               onChange={(e) => setMessage(e.target.value)}
@@ -62,6 +72,8 @@ const ContactForm = ({ isOpen, onClose, onSave }) => {
             />
           </div>
           <button type="submit">Відправити</button>
+
+          {response && <p style={{ marginTop: '10px' }}>{response}</p>}
         </form>
       </div>
     </div>
