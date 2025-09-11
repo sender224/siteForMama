@@ -10,6 +10,8 @@ function Main() {
         <button height="100px" weight="200px"> Записатись </button>	</div>
 		</div>
 		<h1> Новини </h1>
+		<div id="news">
+		</div>
 		</main>
 		);
 }
