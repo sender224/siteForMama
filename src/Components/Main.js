@@ -1,4 +1,5 @@
 import ImageLL from "../Images/intro-img-1.png"
+import TagembedWidget from "./TagembedWidget";
 function Main() {
 	return (
 		<main>
@@ -11,7 +12,9 @@ function Main() {
 		</div>
 		<h1> Новини </h1>
 		<div id="news">
+
 		</div>
+		
 		</main>
 		);
 }
